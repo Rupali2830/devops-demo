@@ -7,5 +7,9 @@ pool:
 steps:
 
 - script: |
+    python -m unittest test_app.py
+  displayName: 'Run Application Tests'
+
+- script: |
     docker build -t devops-demo:$(Build.BuildId) .
   displayName: 'Build Docker Image'
