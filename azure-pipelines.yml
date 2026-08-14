@@ -11,5 +11,13 @@ steps:
   displayName: 'Run Application Tests'
 
 - script: |
-    docker build -t devops-demo:BUILD_ID .
+    docker build -t devops-demo:$(Build.BuildId) .
   displayName: 'Build Docker Image'
+
+- script: |
+    docker tag devops-demo:$(Build.BuildId) localhost:5000/devops-demo:$(Build.BuildId)
+  displayName: 'Tag Docker Image'
+
+- script: |
+    docker push localhost:5000/devops-demo:$(Build.BuildId)
+  displayName: 'Push Docker Image'
